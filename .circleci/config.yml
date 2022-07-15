@@ -21,8 +21,6 @@ jobs:
 
   node-step:
     <<: *ubu-img
-    docker:
-      - image: smitkumarpatel/sample
     steps:
       - run:
           name: Cat
