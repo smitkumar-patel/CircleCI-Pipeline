@@ -13,6 +13,7 @@ ubu-img: &ubu-img
 
 jobs:
   setup:
+    <<: *ubu-img
     steps:
       - run:
           name: Cat
@@ -27,6 +28,9 @@ jobs:
       - run:
           name: Install Docker client
           command: apk add docker-cli
+      - run:
+          name: Start docker
+          command: systemctl start docker
       - run:
           name: pull image
           command: docker pull smitkumarpatel/sample
