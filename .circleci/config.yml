@@ -21,6 +21,8 @@ jobs:
 
   node-step:
     <<: *ubu-img
+    docker:
+      - image: smitkumarpatel/sample
     steps:
       - run:
           name: Cat
@@ -33,8 +35,6 @@ jobs:
           command: docker build -t sample smitkumarpatel/sample
       - setup_remote_docker:
           docker_layer_caching: true
-      - docker:
-          - image: smitkumarpatel/sample
       - run:
           name: docker run
           command: docker run -it --rm --entrypoint bash smitkumarpatel/sample
