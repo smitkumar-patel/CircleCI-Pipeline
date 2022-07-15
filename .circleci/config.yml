@@ -8,13 +8,11 @@ workflows:
 
 jobs:
   node-step:
-
-    steps:
-      docker:
+    docker:
       - image: smitkumarpatel/sample
         auth:
           username: $USERNAME
-          password: $PASSWORD 
+          password: $PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
