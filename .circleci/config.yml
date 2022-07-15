@@ -23,8 +23,17 @@ jobs:
           name: list
           command: ls -a
       - run:
+          name: cd
+          command: cd /user/src/app
+      - run:
           name: list
-          command: ls -ld /user/src/app
+          command: ls -a
+      - run:
+          name: cd
+          command: cd ~/
+      - run:
+          name: list
+          command: ls -a
       - run:
           name: Cat
           command: cat /etc/os-release
