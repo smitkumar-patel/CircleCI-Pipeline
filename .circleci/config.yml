@@ -29,6 +29,9 @@ jobs:
           name: Install Docker client
           command: apk add docker-cli
       - run:
+          name: pull image
+          command: docker pull smitkumarpatel/sample
+      - run:
           name: docker build
           command: docker build -t sample smitkumarpatel/sample
       - setup_remote_docker:
