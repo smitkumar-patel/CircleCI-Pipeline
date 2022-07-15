@@ -5,7 +5,7 @@ workflows:
   pipeline:
     jobs:
       - setup
-      - run
+      - node-step
 
 ubu-img: &ubu-img
   docker:
@@ -13,31 +13,34 @@ ubu-img: &ubu-img
 
 jobs:
   setup:
-    - run:
-        name: Cat
-        command: cat /etc/os-release
-  <<: *ubu-img
-  setup:
-    - run:
-        name: Cat
-        command: cat /etc/os-release 
-    - run:
-        name: Install Docker client
-        command: apk add docker-cli
-    - run:
-        name: pull image
-        command: docker pull smitkumarpatel/sample
-    - run:
-        name: docker build
-        command: docker build -t sample smitkumarpatel/sample
-    - setup_remote_docker:
-        docker_layer_caching: true
-    - run:
-        name: docker run
-        command: docker run -it --rm --entrypoint bash  smitkumarpatel/sample
-    - run:
-        name: run node
-        command: npm start
-    - run:
-        name: Cat
-        command: cat /etc/os-release
+    steps:
+      - run:
+          name: Cat
+          command: cat /etc/os-release
+
+  node-step:
+    <<: *ubu-img
+    steps:
+      - run:
+          name: Cat
+          command: cat /etc/os-release
+      - run:
+          name: Install Docker client
+          command: apk add docker-cli
+      - run:
+          name: pull image
+          command: docker pull smitkumarpatel/sample
+      - run:
+          name: docker build
+          command: docker build -t sample smitkumarpatel/sample
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: docker run
+          command: docker run -it --rm --entrypoint bash  smitkumarpatel/sample
+      - run:
+          name: run node
+          command: npm start
+      - run:
+          name: Cat
+          command: cat /etc/os-release
