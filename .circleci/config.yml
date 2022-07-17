@@ -1,20 +1,11 @@
-version: 2
+version: 2.1
+
+orbs:
+  test-orb: smitkumar-patel/test-orb@dev:alpha
 
 workflows:
-  version: 2
+  version: 2.1
   pipeline:
     jobs:
-      - node-step
-
-jobs:
-  node-step:
-    # docker:
-    #   - image: smitkumarpatel/sample
-    #     auth:
-    #       username: $USERNAME
-    #       password: $PASSWORD
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: npm start
+      - test-orb/post-to-ms-teams:
+          ids: "10,20,30,40"
